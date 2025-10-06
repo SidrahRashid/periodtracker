@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Period Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=123">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffeef2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p, td, th, label, input, a {
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 400px;
+            background: white;
+            margin: 50px auto;
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0px 0px 15px #e6b3c2;
+
+            display: flex;
+            flex-direction: column; /* stack elements vertically */
+            align-items: center;    /* center horizontally */
+            gap: 20px;              /* space between elements */
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 80%;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #e75480;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #c7436e;
+        }
+
+        a {
+            color: #e75480;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Heading -->
+        <h1>Login</h1>
+
+        <!-- Login Form -->
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Register Link -->
+        <div class="nav-links">
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

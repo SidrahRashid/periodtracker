@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=123">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Period Tracker</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffeef2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p, td, th, label, input, a {
+            font-weight: 400;
+        }
+
+        header {
+            background-color: #e75480;
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            margin: 30px auto;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px #e6b3c2;
+
+            display: flex;
+            flex-direction: column; /* stack elements vertically */
+            align-items: center;    /* center horizontally */
+            gap: 20px;              /* space between sections */
+        }
+
+        h1 {
+            color: #e75480;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f9d5dc;
+        }
+
+        #chart-container {
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        canvas {
+            margin-top: 15px;
+        }
+
+        .info-box {
+            background-color: #ffe6ec;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 18px;
+            width: 100%;
+        }
+
+        .add-btn {
+            display: inline-block;
+            margin: 10px 0;
+            background-color: #e75480;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #c7436e;
+        }
+
+        .nav-links a {
+            color: #e75480;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Heading Section -->
+        <div class="heading">
+            <h1>Welcome, {{ current_user.username }} 👋</h1>
+            <a href="/add" class="add-btn">➕ Add New Cycle</a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <a href="/logout">Logout</a>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <p><strong>Next Predicted Period:</strong> {{ next_period }}</p>
+            <p><strong>Fertile Window:</strong> {{ fertile_window }}</p>
+        </div>
+
+        <!-- Previous Cycles Table -->
+        <div class="content">
+            <h2>Previous Cycles</h2>
+            {% if cycles %}
+            <table>
+                <tr>
+                    <th>Start Date</th>
+                    <th>Cycle Length (days)</th>
+                </tr>
+                {% for date, length in cycles %}
+                <tr>
+                    <td>{{ date }}</td>
+                    <td>{{ length }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No cycles recorded yet. <a href="/add">Add your first cycle</a></p>
+            {% endif %}
+        </div>
+
+        <!-- Cycle Chart -->
+        <div id="chart-container">
+            <h2>Cycle Length Trends</h2>
+            <canvas id="cycleChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('cycleChart').getContext('2d');
+        const cycleChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ cycle_dates | tojson }},
+                datasets: [{
+                    label: 'Cycle Length (days)',
+                    data: {{ cycle_lengths | tojson }},
+                    borderColor: 'rgb(231, 84, 128)',
+                    backgroundColor: 'rgba(231, 84, 128, 0.2)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        suggestedMin: 20,
+                        suggestedMax: 40
+                    }
+                },
+                plugins: {
+                    legend: { display: true, position: 'bottom' },
+                    title: {
+                        display: true,
+                        text: 'Your Cycle History',
+                        color: '#e75480',
+                        font: { size: 18 }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

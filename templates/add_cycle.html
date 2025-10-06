@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=123">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Cycle | Period Tracker</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffeef2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p, td, th, label, input, a {
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 450px;
+            background: white;
+            margin: 50px auto;
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0px 0px 15px #e6b3c2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            text-align: left;
+            display: block;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #e75480;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #d1436f;
+        }
+
+        .nav-links {
+            margin-top: 10px;
+        }
+
+        a {
+            color: #e75480;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span>Logged in as {{ current_user.username }}</span>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <h1>Add Your Period Cycle 🩸</h1>
+
+        <form action="/add" method="POST">
+            <div>
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" required>
+            </div>
+
+            <div>
+                <label for="cycle_length">Cycle Length (days):</label>
+                <input type="number" id="cycle_length" name="cycle_length" min="20" max="45" required>
+            </div>
+
+            <button type="submit">Add Cycle</button>
+        </form>
+
+        <div class="nav-links">
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

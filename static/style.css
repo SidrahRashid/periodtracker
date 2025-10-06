@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Baloo+2:wght@500&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 40px;
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column; /* stack children vertically */
+    align-items: center;    /* center horizontally */
+    gap: 15px;              /* spacing between elements */
+}
+
+.heading h1 {
+    font-family: 'Baloo 2', cursive;
+    color: #d81b60;
+    text-align: center;
+}
+
+.nav-links {
+    text-align: center;     /* center the links */
+}
+
+.nav-links a {
+    margin: 0 10px;         /* space between links */
+    text-decoration: none;
+    font-weight: 600;
+    color: #d81b60;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.content p {
+    text-align: center;
+}
+
+
+/* Headings */
+h1, h2, h3 {
+    font-family: 'Baloo 2', cursive;
+    color: #d81b60;
+    margin-bottom: 20px;
+    text-align: center;   /* Only headings are centered */
+}
+
+
+/* Input fields */
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #d81b60;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #8e24aa;
+}
+
+/* Buttons */
+button {
+    background: #d81b60;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 2px solid #ffb3b3;
+    text-align: center;   /* Center table cells */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;   /* spacing between inputs */
+}
+
+
+button:hover {
+    background: #ad1457;
+    transform: translateY(-2px);
+}
+
+/* Links */
+a {
+    color: #8e24aa;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Flash messages or info text */
+p, .message {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
